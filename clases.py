@@ -8,8 +8,8 @@ class Detector:
     def detectar_mutantes_horizontal(self):
         for fila in self.matriz_adn:
             for i in range(len(fila) - 3):
-             if fila[i] == fila[i+1] == fila[i+2] == fila[i+3]:
-                return True
+                if fila[i] == fila[i+1] == fila[i+2] == fila[i+3]:
+                    return True
         return False
     def detectar_mutantes_vertical(self):
         for j in range(len(self.matriz_adn[0])):  # Iterar sobre las columnas
