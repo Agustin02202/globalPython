@@ -52,6 +52,8 @@ class Radiacion(Mutador):
     def crear_mutante(self, matriz: list, posicion_inicial, orientacion_de_la_mutacion) -> bool:
         try:
             fila, columna = posicion_inicial
+            fila-=1
+            columna-=1
             if orientacion_de_la_mutacion == 'H':
                 # Reemplaza cuatro bases consecutivas horizontalmente
                 matriz[fila] = matriz[fila][:columna] + [self.base_nitrogenada] * 4 + matriz[fila][columna + 4:]
@@ -72,6 +74,8 @@ class Virus(Mutador):
     def crear_mutante(self, matriz: list, posicion_inicial) -> bool:
         try:
             fila, columna = posicion_inicial
+            fila-=1
+            columna-=1
             # Solo muta diagonalmente, sin importar la orientación
             for i in range(4):  # Realiza la mutación diagonal
                 # Verificar que no se salga de los límites de la matriz
