@@ -101,7 +101,7 @@ class Virus(Mutador):
         return adn_original
     
 class Sanador:
-    def init(self, matriz_adn, base_nitrogenada='ACGT'):
+    def __init__(self, matriz_adn, base_nitrogenada='ACGT'):
         self.matriz_adn = matriz_adn
         self.base_nitrogenada=base_nitrogenada
 
