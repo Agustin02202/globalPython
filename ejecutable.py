@@ -76,10 +76,18 @@ while True:
             # Crear el mutante
             matriz_mutada = mutador.crear_mutante(matriz_adn, fila, columna, orientacion)
 
+            if matriz_mutada:
 
-        elif tipo_mutador == '2':
+                matriz_adn = matriz_mutada
+                print("ADN mutado:")
+                imprimir_matriz_adn(matriz_adn)
 
-            # Mutador de tipo Virus
+            else:
+
+                print("Error al mutar el ADN.")
+
+
+        elif tipo_mutador == '2':  # Virus
 
             base_nitrogenada = input("Introduce la base nitrogenada (A, T, C, G): ").upper()
 
@@ -87,23 +95,22 @@ while True:
 
             columna = int(input("Columna de la posición inicial: "))
 
-            # Crear la instancia de la clase Virus
+        mutador = Virus(base_nitrogenada, matriz_adn)
 
-            mutador = Virus(matriz_adn, base_nitrogenada)
+        # Crear el mutante
 
-            # Crear el mutante
-
-            matriz_mutada = mutador.crear_mutante(matriz_adn,fila, columna)
-
-        else:
-            print("Selección inválida. Intenta de nuevo.")
-            continue
+        matriz_mutada = mutador.crear_mutante(matriz_adn, fila, columna)
 
         if matriz_mutada:
+
             matriz_adn = matriz_mutada
+
             print("ADN mutado:")
-            imprimir_matriz_adn(matriz_adn)
+
+            imprimir_matriz_adn(matriz_adn)  # Imprimir la matriz después de mutarla
+
         else:
+
             print("Error al mutar el ADN.")
 
     elif opcion == '3':
