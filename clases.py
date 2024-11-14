@@ -36,7 +36,7 @@ class Detector:
         return self.detectar_mutantes_horizontal() or self.detectar_mutantes_vertical() or self. detectar_mutantes_diagonal()
 
 class Mutador:
-    def __init__(self, base_nitrogenada, matriz_adn):
+    def __init__(self, base_nitrogenada, matriz_adn=None):
         self.base_nitrogenada = base_nitrogenada
         self.matriz_adn = matriz_adn
 
@@ -45,61 +45,45 @@ class Mutador:
         pass
 
 class Radiacion(Mutador):
-    def __init__(self, base_nitrogenada, adn_original):
-        super().__init__(base_nitrogenada, adn_original)
+    def __init__(self, base_nitrogenada, matriz_adn):
+        super().__init__(base_nitrogenada, matriz_adn)
 
-    def crear_mutante(self, adn_original, posicion_inicial, orientacion_de_la_mutacion):
+    def crear_mutante(self, matriz: list, posicion_inicial, orientacion_de_la_mutacion) -> bool:
         try:
             fila, columna = posicion_inicial
-            if orientacion_de_la_mutacion == "H":
-                if columna + 3 >= len(adn_original[0]):
-                    raise IndexError("La mutación se sale de los límites de la matriz.")
+            if orientacion_de_la_mutacion == 'H':
+                # Reemplaza cuatro bases consecutivas horizontalmente
+                matriz[fila] = matriz[fila][:columna] + [self.base_nitrogenada] * 4 + matriz[fila][columna + 4:]
+            elif orientacion_de_la_mutacion == 'V':
+                # Reemplaza cuatro bases consecutivas verticalmente
                 for i in range(4):
-                    adn_original[fila][columna + i] = self.base_nitrogenada
-            elif orientacion_de_la_mutacion == "V":
-                if fila + 3 >= len(adn_original):
-                    raise IndexError("La mutación se sale de los límites de la matriz.")
-                for i in range(4):
-                    adn_original[fila + i][columna] = self.base_nitrogenada
-            else:
-                raise ValueError("Orientación inválida para Radiacion. Use 'H' o 'V'.")
-        except IndexError as e:
-            print(f"Error de índice: {e}")
-        except ValueError as e:
-            print(f"Error de valor: {e}")
-        return adn_original
+                    matriz[fila + i] = matriz[fila + i][:columna] + [self.base_nitrogenada] + matriz[fila + i][columna + 1:]
+            return matriz
+        except Exception as e:
+            print(f"Error creando mutante: {e}")
+            return None
+
 
 class Virus(Mutador):
-    def __init__(self, base_nitrogenada, adn_original):
-        super().__init__(base_nitrogenada, adn_original)
+    def __init__(self, base_nitrogenada, matriz_adn):
+        super().__init__(base_nitrogenada, matriz_adn)
 
-    def crear_mutante(self, adn_original, posicion_inicial):
+    def crear_mutante(self, matriz: list, posicion_inicial) -> bool:
         try:
             fila, columna = posicion_inicial
-            if fila + 3 >= len(adn_original) or columna + 3 >= len(adn_original[0]):
-                raise IndexError("La mutación diagonal se sale de los límites de la matriz.")
-            for i in range(4):
-                adn_original[fila + i][columna + i] = self.base_nitrogenada
-        except IndexError as e:
-            print(f"Error de índice: {e}")
-        return adn_original
+            # Solo muta diagonalmente, sin importar la orientación
+            for i in range(4):  # Realiza la mutación diagonal
+                # Verificar que no se salga de los límites de la matriz
+                if fila + i < len(matriz) and columna + i < len(matriz[fila + i]):
+                    matriz[fila + i] = matriz[fila + i][:columna + i] + [self.base_nitrogenada] + matriz[fila + i][columna + i + 1:]
+                else:
+                    raise IndexError("No hay suficiente espacio para mutación diagonal.")
+            return matriz
+        except Exception as e:
+            print(f"Error creando mutante: {e}")
+            return None
 
-class Virus(Mutador):
-    def crear_mutante(self, adn_original, posicion_inicial):
-        try:
-            fila, columna = posicion_inicial
-            # Verificación más precisa de los límites
-            if not (0 <= fila <= len(adn_original) - 4 and 0 <= columna <= len(adn_original[0]) - 4):
-                raise IndexError("La mutación diagonal se sale de los límites de la matriz.")
 
-            # Modificación para asegurar que siempre se muestren las últimas 4 posiciones
-            for i in range(4):
-                adn_original[fila + i][columna + i] = self.base_nitrogenada
-
-        except IndexError as e:
-            print(f"Error de índice: {e}")
-        return adn_original
-    
 class Sanador:
     def __init__(self, matriz_adn, base_nitrogenada='ACGT'):
         self.matriz_adn = matriz_adn
