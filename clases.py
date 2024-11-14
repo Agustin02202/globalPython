@@ -21,16 +21,17 @@ class Detector:
 
     def detectar_mutantes_diagonal(self):
         n = len(self.matriz_adn)
-        for i in range(n - 3):  # Iteramos hasta n-3 para asegurar que tengamos al menos 4 elementos en la diagonal
+        for i in range(n - 3):  # Iteramos hasta n-3 para asegurar que haya suficiente espacio
             # Diagonales principales
             for j in range(n - i - 3):
                 if all(self.matriz_adn[i + k][j + k] == self.matriz_adn[i][j] for k in range(4)):
-                    return True
+                    return True  # Si se detecta una secuencia mutada, devuelve True
             # Diagonales secundarias
             for j in range(i + 3, n):
                 if all(self.matriz_adn[i + k][j - k] == self.matriz_adn[i][j] for k in range(4)):
-                    return True
+                    return True  # Si se detecta una secuencia mutada, devuelve True
         return False
+
 
     def detectar_mutantes(self):
         return self.detectar_mutantes_horizontal() or self.detectar_mutantes_vertical() or self. detectar_mutantes_diagonal()
