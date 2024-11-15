@@ -6,6 +6,7 @@ class Detector:
         self.secuencia_a_buscar = secuencia_a_buscar
 
     def detectar_mutantes_horizontal(self):
+        # Detecta secuencias de 4 bases nitrogenadas consecutivas en las filas
         for fila in self.matriz_adn:
             for i in range(len(fila) - 3):
                 if fila[i] == fila[i + 1] == fila[i + 2] == fila[i + 3]: #
@@ -120,3 +121,5 @@ class Sanador:
                 continue
             else:
                 return nuevo_adn
+            
+             
