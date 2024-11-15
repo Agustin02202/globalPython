@@ -72,9 +72,9 @@ while True:
             columna = int(input("Columna de la posición inicial: "))
             orientacion = input("Orientación de la mutación (H para horizontal, V para vertical): ").upper()
             # Crear la instancia de la clase Radiacion sin el argumento innecesario
-            mutador = Radiacion(base_nitrogenada, matriz_adn)
+            mutador = Radiacion(base_nitrogenada, matriz_adn, fila, columna)
             # Crear el mutante
-            matriz_mutada = mutador.crear_mutante(matriz_adn, fila, columna, orientacion)
+            matriz_mutada = mutador.crear_mutante(matriz_adn, orientacion)
 
             if matriz_mutada:
 
@@ -95,7 +95,7 @@ while True:
 
             columna = int(input("Columna de la posición inicial: "))
 
-        mutador = Virus(base_nitrogenada, matriz_adn)
+        mutador = Virus(base_nitrogenada, matriz_adn, fila, columna)
 
         # Crear el mutante
 
