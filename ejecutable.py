@@ -1,16 +1,15 @@
-from clases import *  # Asegúrate de tener las clases necesarias en clases.py
-
+from clases import *  #Importamos las clases de clses.py
 
 def validar_adn(adn):
-    """Valida que el ADN tenga solo 6 caracteres A, T, C, G."""
+    """Validar que el ADN tenga solo 6 caracteres A, T, C, G."""
     return len(adn) == 6 and all(base in 'ATCG' for base in adn.upper())
-
 
 def ingresar_adn():
     """Permite al usuario ingresar 6 líneas de ADN y las valida."""
     matriz_adn = []
+    print("Coloca una línea de ADN (6 caracteres, A, T, C, G)")
     while len(matriz_adn) < 6:
-        adn = input("Coloca una línea de ADN (6 caracteres, A, T, C, G): ").upper()
+        adn = input("Colocar linea de ADN: ").upper()
         if validar_adn(adn):
             matriz_adn.append(list(adn))
             print(f"Línea añadida: {adn}")
@@ -20,7 +19,7 @@ def ingresar_adn():
 
 
 def imprimir_matriz_adn(matriz_adn):
-    """Imprime la matriz de ADN de forma legible."""
+    """Imprime la matriz de ADN"""
     for fila in matriz_adn:
         print(" ".join(fila))
 
@@ -83,38 +82,30 @@ while True:
                 imprimir_matriz_adn(matriz_adn)
 
             else:
-
                 print("Error al mutar el ADN.")
-
 
         elif tipo_mutador == '2':  # Virus
 
             base_nitrogenada = input("Introduce la base nitrogenada (A, T, C, G): ").upper()
-
             fila = int(input("Fila de la posición inicial: "))
-
             columna = int(input("Columna de la posición inicial: "))
 
         mutador = Virus(base_nitrogenada, matriz_adn, fila, columna)
 
         # Crear el mutante
-
         matriz_mutada = mutador.crear_mutante(matriz_adn, fila, columna)
 
         if matriz_mutada:
 
             matriz_adn = matriz_mutada
-
             print("ADN mutado:")
-
             imprimir_matriz_adn(matriz_adn)  # Imprimir la matriz después de mutarla
 
         else:
-
             print("Error al mutar el ADN.")
 
     elif opcion == '3':
-        # Sanar el ADN
+        # Se sana el adn
         print("Sanando el ADN...")
         sanador = Sanador(matriz_adn)
         matriz_adn = sanador.sanar_mutantes()
