@@ -122,4 +122,4 @@ class Sanador:
             else:
                 return nuevo_adn
             
-             
+            

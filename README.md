@@ -1,4 +1,4 @@
-# Global Pyhton :snake:
+# Global Python :snake:
 # 🧬 Guía de Uso: Programa de Análisis de ADN y Manipulación de ADN
 
 Este programa permite analizar, manipular y sanar cadenas de ADN. Utiliza algoritmos para detectar mutaciones horizontales, verticales y diagonales, además de ofrecer herramientas para simular mutaciones y revertirlas.
@@ -17,10 +17,12 @@ Este programa permite analizar, manipular y sanar cadenas de ADN. Utiliza algori
 - Python instalado (versión 3.8 o superior).
 - Tener ambos archivos (**clases.py** y **ejecutable.py**) en el mismo directorio.
 
-1. **Da click** en el triángulo ubicado en la esquina superior derecha.  
-   ![Imagen del Triángulo](image)
+1. **Da click** en el botón correspondiente para correr el código de ejecutable.py en tu IDE de preferencia, o ejecuta el comando para abrir la terminal en el IDE y correr el programa.  
+
    O en su defecto, abre una terminal en el directorio del archivo y ejecuta el comando **python ejecutable.py**
-   ![Imagen de terminal](image)
+   ```bash
+   cd directorio_del_archivo
+   python ejecutable.py 
 
 2. **Ingresa la Matriz de ADN:**  
    - La matriz debe **6 líneas**, cada una con **6 caracteres**.
@@ -28,7 +30,8 @@ Este programa permite analizar, manipular y sanar cadenas de ADN. Utiliza algori
    - Si introduces un formato incorrecto, el programa mostrará un mensaje de error.  
    
    **Ejemplo de entrada válida:**  
-   ![Ejemplo de Matriz](image)
+   ![Ejemplo de Matriz](./images/ingreso_cadenas.png)
+   ![Matriz](./images/adn_ingresado.png)
 
 ---
 
@@ -43,7 +46,7 @@ Al iniciar el programa, tendrás un menú interactivo con las siguientes opcione
 
 Selecciona el número correspondiente para realizar la acción deseada.
 
-![Imagen del Menú](image)
+![Imagen del Menú](./images/menu.png)
 
 ---
 
@@ -64,7 +67,7 @@ Al seleccionar la opción `2`, puedes elegir cómo deseas mutar el ADN:
 1. **Radiación**: Presiona la tecla `1`. Lo que ejecuta es una mutación de tipo horizontal `H` o vertical `V`.  
 2. **Virus**: Presiona la tecla `2`. Ejecuta una mutación de tipo diagonal `D` por defecto sobre el ADN.  
 
-![Imagen de Mutación](image)
+![Imagen de Mutación](./images/mutacion.png)
 
 **Pasos para mutar**:
 
@@ -78,7 +81,7 @@ Al seleccionar la opción `2`, puedes elegir cómo deseas mutar el ADN:
 4. Indica la orientación (solo para Radiación: H o V).
 
 El programa aplicará la mutación y mostrará la nueva matriz de ADN.
-![Imagen de ADN Mutado](image)
+![Imagen de ADN Mutado](./images/adn_mutado.png)
 
 ---
 
@@ -89,14 +92,15 @@ Selecciona la opción `3` para restaurar la cadena de ADN a su estado original s
 -Se generará una nueva matriz de ADN aleatoria que **no contenga mutaciones**.
 - El programa imprimirá la matriz sana en pantalla
 
-![Imagen de Sanación](image)
+![Imagen de Sanación](./images/sanacion.png)
+
 ---
 
 ## ✅ **Finalizando el Programa**
 Cuando desees salir, presiona el número `4`.  
 El programa finalizará y todos los cambios quedarán registrados.
 
-![Imagen Final](image)
+![Imagen Final](./images/salida.png)
 
 ---
 

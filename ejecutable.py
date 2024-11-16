@@ -60,47 +60,50 @@ while True:
 
 
     elif opcion == '2':
-        # Mutar el ADN
-        print("Mutando el ADN...")
-        tipo_mutador = input("Selecciona el tipo de mutador (1: Radiación, 2: Virus): ")
+        while True:    
+            # Mutar el ADN
+            print("Mutando el ADN...")
+            tipo_mutador = input("Selecciona el tipo de mutador (1: Radiación, 2: Virus): ")
 
-        if tipo_mutador == '1':
-            # Mutador de tipo Radiación
-            base_nitrogenada = input("Introduce la base nitrogenada (A, T, C, G): ").upper()
-            fila = int(input("Fila de la posición inicial: "))
-            columna = int(input("Columna de la posición inicial: "))
-            orientacion = input("Orientación de la mutación (H para horizontal, V para vertical): ").upper()
-            # Crear la instancia de la clase Radiacion sin el argumento innecesario
-            mutador = Radiacion(base_nitrogenada, matriz_adn, fila, columna)
-            # Crear el mutante
-            matriz_mutada = mutador.crear_mutante(matriz_adn, orientacion)
+            if tipo_mutador == '1':
+                # Mutador de tipo Radiación
+                base_nitrogenada = input("Introduce la base nitrogenada (A, T, C, G): ").upper()
+                fila = int(input("Fila de la posición inicial: "))
+                columna = int(input("Columna de la posición inicial: "))
+                orientacion = input("Orientación de la mutación (H para horizontal, V para vertical): ").upper()
+                # Crear la instancia de la clase Radiacion sin el argumento innecesario
+                mutador = Radiacion(base_nitrogenada, matriz_adn, fila, columna)
+                # Crear el mutante
+                matriz_mutada = mutador.crear_mutante(matriz_adn, orientacion)
 
-            if matriz_mutada:
+                if matriz_mutada:
+                    matriz_adn = matriz_mutada
+                    print("ADN mutado:")
+                    imprimir_matriz_adn(matriz_adn)
+                    break
+                else:
+                    print("Error al mutar el ADN.")
+                    break
 
-                matriz_adn = matriz_mutada
-                print("ADN mutado:")
-                imprimir_matriz_adn(matriz_adn)
+            elif tipo_mutador == '2':  # Virus
 
-            else:
-                print("Error al mutar el ADN.")
+                base_nitrogenada = input("Introduce la base nitrogenada (A, T, C, G): ").upper()
+                fila = int(input("Fila de la posición inicial: "))
+                columna = int(input("Columna de la posición inicial: "))
+                mutador = Virus(base_nitrogenada, matriz_adn, fila, columna)
+                # Crear el mutante
+                matriz_mutada = mutador.crear_mutante(matriz_adn, fila, columna)
 
-        elif tipo_mutador == '2':  # Virus
-
-            base_nitrogenada = input("Introduce la base nitrogenada (A, T, C, G): ").upper()
-            fila = int(input("Fila de la posición inicial: "))
-            columna = int(input("Columna de la posición inicial: "))
-            mutador = Virus(base_nitrogenada, matriz_adn, fila, columna)
-            # Crear el mutante
-            matriz_mutada = mutador.crear_mutante(matriz_adn, fila, columna)
-
-            if matriz_mutada:
-
-                matriz_adn = matriz_mutada
-                print("ADN mutado:")
-                imprimir_matriz_adn(matriz_adn)  # Imprimir la matriz después de mutarla
-
-            else:
-                print("Error al mutar el ADN.")
+                if matriz_mutada:
+                    matriz_adn = matriz_mutada
+                    print("ADN mutado:")
+                    imprimir_matriz_adn(matriz_adn)  # Imprimir la matriz después de mutarla
+                    break
+                else:
+                    print("Error al mutar el ADN.")
+                    break
+            else: 
+                print("Opción no valida, elija una de las opciones proporcionadas...")
 
     elif opcion == '3':
         # Se sana el adn
