@@ -89,20 +89,18 @@ while True:
             base_nitrogenada = input("Introduce la base nitrogenada (A, T, C, G): ").upper()
             fila = int(input("Fila de la posición inicial: "))
             columna = int(input("Columna de la posición inicial: "))
+            mutador = Virus(base_nitrogenada, matriz_adn, fila, columna)
+            # Crear el mutante
+            matriz_mutada = mutador.crear_mutante(matriz_adn, fila, columna)
 
-        mutador = Virus(base_nitrogenada, matriz_adn, fila, columna)
+            if matriz_mutada:
 
-        # Crear el mutante
-        matriz_mutada = mutador.crear_mutante(matriz_adn, fila, columna)
+                matriz_adn = matriz_mutada
+                print("ADN mutado:")
+                imprimir_matriz_adn(matriz_adn)  # Imprimir la matriz después de mutarla
 
-        if matriz_mutada:
-
-            matriz_adn = matriz_mutada
-            print("ADN mutado:")
-            imprimir_matriz_adn(matriz_adn)  # Imprimir la matriz después de mutarla
-
-        else:
-            print("Error al mutar el ADN.")
+            else:
+                print("Error al mutar el ADN.")
 
     elif opcion == '3':
         # Se sana el adn
